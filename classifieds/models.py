@@ -5,6 +5,16 @@ from django.db import models
 class Region(models.Model):
     location = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.location
+
+
+class Category(models.Model):
+    name=models.CharField(max_length=25, default=None)
+    subcategory=models.ForeignKey('self', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Listing(models.Model):
     title = models.CharField(max_length=50)
@@ -13,7 +23,7 @@ class Listing(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     photo = models.ImageField(upload_to="profile_photos", null=True, blank=True)
-
+    category=models.ForeignKey(Category)
 
 class Profile(models.Model):
     user = models.OneToOneField("auth.User")
