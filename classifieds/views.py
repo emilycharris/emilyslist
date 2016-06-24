@@ -25,8 +25,13 @@ class CreateUserView(CreateView):
     form_class = UserCreationForm
     success_url = "/login"
 
-class CategoryDetailView(DetailView):
-    model = Category
+class CategoryListView(ListView):
+    model = Listing
+    template_name = 'classifieds/category_list.html'
+
+    def get_queryset(self, **kwargs):
+        category_id = self.kwargs.get('pk', None)
+        return Listing.objects.filter(category=category_id)
 
 class ListingCreateView(CreateView):
     pass

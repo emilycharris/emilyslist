@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from classifieds.views import IndexView, ListingCreateView, ListingListView, ListingDetailView, ProfileUpdateView, ListingDeleteView, ListingUpdateView, CreateUserView, CategoryDetailView
+from classifieds.views import IndexView, ListingCreateView, ListingListView, ListingDetailView, ProfileUpdateView, ListingDeleteView, ListingUpdateView, CreateUserView, CategoryListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^listing/(?P<pk>\d+)/delete/$', ListingDeleteView.as_view(), name="listing_delete_view"),
     url(r'^listing/(?P<pk>\d+)/update/$', ListingUpdateView.as_view(), name='listing_update_view'),
     url(r'^create_user/$', CreateUserView.as_view(), name='create_user_view'),
-    url(r'^category/(?P<pk>\d+)/$', CategoryDetailView.as_view(), name='category_detail_view')
+    url(r'^category/(?P<pk>\d+)/$', CategoryListView.as_view(), name='category_list_view')
  ]
