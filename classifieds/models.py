@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -27,4 +30,11 @@ class Listing(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField("auth.User")
-    location = models.ForeignKey(Region)
+    location = models.ForeignKey(Region, default=1)
+
+@receiver(post_save, sender='auth.User')
+def create_user_profile(**kwargs):
+    created = kwargs.get("created")
+    instance = kwargs.get("instance")
+    if created:
+        Profile.objects.create(user=instance)

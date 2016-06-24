@@ -43,7 +43,12 @@ class ListingDetailView(DetailView):
     pass
 
 class ProfileUpdateView(UpdateView):
-    pass
+    model = Profile
+    fields = ['location']
+    success_url = reverse_lazy('profile_update_view')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
 
 class ListingDeleteView(DeleteView):
     pass
