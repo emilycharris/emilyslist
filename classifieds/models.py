@@ -11,7 +11,7 @@ class Region(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=25, default=None)
-    subcategory=models.ForeignKey('self', null=True, blank=True)
+    parent=models.ForeignKey('self', null=True, blank=True, related_name='child')
 
     def __str__(self):
         return self.name

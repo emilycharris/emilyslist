@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for object in object_list  %}
+<ul>
+<h2>{{object.name}}</h2>
+  {% for object in object.child.all  %}
+  <ul>
+      <a href="{% url 'category_detail_view' object.pk %}"><h4>{{object.name}}</h4></a>
+  </ul>
+{% endfor %}
+</ul>
+
+{% endfor %}
+
+{% endblock %}
