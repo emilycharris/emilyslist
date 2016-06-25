@@ -45,7 +45,7 @@ class ListingDetailView(DetailView):
 class ProfileUpdateView(UpdateView):
     model = Profile
     fields = ['location']
-    success_url = reverse_lazy('profile_update_view')
+    success_url = reverse_lazy('index_view')
 
     def get_object(self, queryset=None):
         return self.request.user.profile
