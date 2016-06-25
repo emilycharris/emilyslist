@@ -36,7 +36,9 @@ class CategoryListView(ListView):
         return Listing.objects.filter(category=category_id)
 
 class ListingCreateView(CreateView):
-    pass
+    model = Listing
+    fields = ["title", 'price', 'location', 'body', 'photo', 'category']
+    success_url = reverse_lazy("index_view")
 
 class ListingDetailView(DetailView):
     pass

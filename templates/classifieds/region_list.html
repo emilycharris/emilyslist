@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="{% url 'index_view' %}"><large><em>Search Listings by Categories Instead</em></large></a>
 
 {% for object in object_list  %}
 <ul>

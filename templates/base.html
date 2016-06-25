@@ -10,12 +10,20 @@
   </head>
   <body>
     <div class="container">
+      {% if user.is_authenticated %}
       <a href="{% url 'index_view' %}">Home</a>
-      <a href="{% url 'login' %}">Login</a>
-      <a href="{% url 'logout' %}?next=/">Logout</a>
-      <a href="{% url 'create_user_view' %}">Create User</a>
+      <a href="{% url 'listing_create_view' %}">Create New Listing</a>
       <a href="{% url 'profile_update_view' %}">Update Profile</a>
+
+      <a href="{% url 'logout' %}?next=/">Logout</a>
+
       {{request.user}}
+
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'create_user_view' %}">Create User</a>
+
+      {% endif %}
       <br>
       <br>
 
