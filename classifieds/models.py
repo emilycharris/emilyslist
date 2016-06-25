@@ -25,8 +25,14 @@ class Listing(models.Model):
     location = models.ForeignKey(Region)
     created = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
-    photo = models.ImageField(upload_to="profile_photos", null=True, blank=True)
+    photo = models.ImageField(upload_to="item_photos", null=True, blank=True)
     category=models.ForeignKey(Category)
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            return self.photo.url
+        return "http://www.clker.com/cliparts/f/Z/G/4/h/Q/no-image-available-md.png"
 
 class Profile(models.Model):
     user = models.OneToOneField("auth.User")

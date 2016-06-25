@@ -27,9 +27,25 @@ class CreateUserView(CreateView):
     form_class = UserCreationForm
     success_url = "/login"
 
-class CategoryListView(ListView):
+class CategoryListThumbnailView(ListView):
     model = Listing
-    template_name = 'classifieds/category_list.html'
+    template_name = 'classifieds/category_list_thumbnail.html'
+
+    def get_queryset(self, **kwargs):
+        category_id = self.kwargs.get('pk') # none needed as second argument???
+        return Listing.objects.filter(category=category_id)
+
+class CategoryListGalleryView(ListView):
+    model = Listing
+    template_name = 'classifieds/category_list_gallery.html'
+
+    def get_queryset(self, **kwargs):
+        category_id = self.kwargs.get('pk') # none needed as second argument???
+        return Listing.objects.filter(category=category_id)
+
+class CategoryListListView(ListView):
+    model = Listing
+    template_name = 'classifieds/category_list_list.html'
 
     def get_queryset(self, **kwargs):
         category_id = self.kwargs.get('pk') # none needed as second argument???
@@ -57,8 +73,27 @@ class ListingDeleteView(DeleteView):
 class ListingUpdateView(UpdateView):
     pass
 
-class CityListingView(ListView):
+class CityListThumbnailView(ListView):
     model = Listing
+    template_name = 'classifieds/city_list_thumbnail.html'
+
+    def get_queryset(self, **kwargs):
+        city_id = self.kwargs.get('pk')
+        return Listing.objects.filter(location=city_id)
+
+
+class CityListGalleryView(ListView):
+    model = Listing
+    template_name = 'classifieds/city_list_gallery.html'
+
+    def get_queryset(self, **kwargs):
+        city_id = self.kwargs.get('pk')
+        return Listing.objects.filter(location=city_id)
+
+
+class CityListListView(ListView):
+    model = Listing
+    template_name = 'classifieds/city_list_list.html'
 
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')

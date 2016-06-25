@@ -9,7 +9,7 @@
 <h2>{{object.name}}</h2>
   {% for object in object.child.all  %}
   <ul>
-      <a href="{% url 'category_list_view' object.pk %}"><h4>{{object.name}}</h4></a>
+      <a href="{% url 'category_list_thumbnail_view' object.pk %}"><h4>{{object.name}}</h4></a>
   </ul>
 {% endfor %}
 </ul>

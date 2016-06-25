@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from classifieds.views import IndexView, ListingCreateView, ListingDetailView, ProfileUpdateView, ListingDeleteView, ListingUpdateView, CreateUserView, CategoryListView, CityListingView, RegionListView
+from classifieds.views import (IndexView, ListingCreateView, ListingDetailView,
+ProfileUpdateView, ListingDeleteView, ListingUpdateView, CreateUserView,
+RegionListView, CityListThumbnailView, CategoryListThumbnailView,
+CategoryListGalleryView, CityListGalleryView, CategoryListListView, CityListListView)
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,7 +32,11 @@ urlpatterns = [
     url(r'^listing/(?P<pk>\d+)/delete/$', ListingDeleteView.as_view(), name="listing_delete_view"),
     url(r'^listing/(?P<pk>\d+)/update/$', ListingUpdateView.as_view(), name='listing_update_view'),
     url(r'^create_user/$', CreateUserView.as_view(), name='create_user_view'),
-    url(r'^category/(?P<pk>\d+)/$', CategoryListView.as_view(), name='category_list_view'),
     url(r'^region_list', RegionListView.as_view(), name='region_list_view'),
-    url(r'^city_listing/(?P<pk>\w+)/$', CityListingView.as_view(), name='city_listing_view')
- ]
+    url(r'^category/(?P<pk>\d+)/thumbnail/$', CategoryListThumbnailView.as_view(), name='category_list_thumbnail_view'),
+    url(r'^city_list/(?P<pk>\w+)/thumbnail/$', CityListThumbnailView.as_view(), name='city_list_thumbnail_view'),
+    url(r'^category/(?P<pk>\d+)/gallery/$', CategoryListGalleryView.as_view(), name='category_list_gallery_view'),
+    url(r'^city_list/(?P<pk>\w+)/gallery/$', CityListGalleryView.as_view(), name='city_list_gallery_view'),
+    url(r'^category/(?P<pk>\d+)/list/$', CategoryListListView.as_view(), name='category_list_list_view'),
+    url(r'^city_list/(?P<pk>\w+)/list/$', CityListListView.as_view(), name='city_list_list_view'),
+ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

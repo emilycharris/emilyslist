@@ -5,7 +5,7 @@
 
 {% for object in object_list  %}
 <ul>
-  <a href="{% url 'city_listing_view' object.pk %}"><h4>{{object.location}}</h4></a>
+  <a href="{% url 'city_list_thumbnail_view' object.pk %}"><h4>{{object.location}}</h4></a>
 </ul>
 
 {% endfor %}
