@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.core.urlresolvers import reverse_lazy
 
+from classifieds.models import Region, Profile, Category, Listing
+
 
 # Create your views here.
 
@@ -30,13 +32,10 @@ class CategoryListView(ListView):
     template_name = 'classifieds/category_list.html'
 
     def get_queryset(self, **kwargs):
-        category_id = self.kwargs.get('pk', None)
+        category_id = self.kwargs.get('pk') # none needed as second argument???
         return Listing.objects.filter(category=category_id)
 
 class ListingCreateView(CreateView):
-    pass
-
-class ListingListView(ListView):
     pass
 
 class ListingDetailView(DetailView):
@@ -55,3 +54,13 @@ class ListingDeleteView(DeleteView):
 
 class ListingUpdateView(UpdateView):
     pass
+
+class CityListingView(ListView):
+    model = Listing
+
+    def get_queryset(self, **kwargs):
+        city_id = self.kwargs.get('pk')
+        return Listing.objects.filter(location=city_id)
+
+class RegionListView(ListView):
+    model = Region

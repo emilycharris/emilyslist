@@ -10,9 +10,11 @@
   </head>
   <body>
     <div class="container">
+      <a href="{% url 'index_view' %}">Home</a>
       <a href="{% url 'login' %}">Login</a>
       <a href="{% url 'logout' %}?next=/">Logout</a>
       <a href="{% url 'create_user_view' %}">Create User</a>
+      <a href="{% url 'profile_update_view' %}">Update Profile</a>
       {{request.user}}
       <br>
       <br>
