@@ -1,25 +1,21 @@
 {% extends "base.html" %}
+{% block view %}
+{% endblock %}
 
 {% block content %}
-<p class='pull-right'>
-Other Views: <a href="">Gallery</a> / <a href="">List</a>
-</p>
-  {% for object in object_list %}
-<div class="media">
-  <div class="media-left">
-    <a href="#">
-      <img class="thumb" src="{{ object.photo_url }}" alt="" /></a>
-  </div>
-  <div class="media-body">
-
-    <h4 class="media-heading">{{object.title}}    ${{object.price}} </h4>
-      <small>{{object.body}}</small>
-      <small><em>{{object.location}}</em></small>
-      <small><em>Posted: {{object.created}}</em></small>
-      <br>
-      <br>
-  </div>
-</div>
+  <div class="row">
+    {% for object in object_list %}
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img class='gallery' src="{{ object.photo_url }}" alt="">
+        <div class="caption">
+          <h3>{{object.title}}</h3>
+          <div>${{object.price}} </div><div>{{object.location}}</div><div> Posted: {{object.created}} </div>
+          <a href="Details" class="btn btn-default" role="button">Details</a></p>
+        </div>
+      </div>
+    </div>
 
   {% endfor %}
+
 {% endblock %}

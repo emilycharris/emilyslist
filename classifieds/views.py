@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from classifieds.models import Category, Listing, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -22,10 +20,12 @@ class IndexView(ListView):
     def get_queryset(self):
         return Category.objects.filter(parent=None)
 
+
 class CreateUserView(CreateView):
     model = User
     form_class = UserCreationForm
     success_url = "/login"
+
 
 class CategoryListThumbnailView(ListView):
     model = Listing
@@ -35,6 +35,7 @@ class CategoryListThumbnailView(ListView):
         category_id = self.kwargs.get('pk') # none needed as second argument???
         return Listing.objects.filter(category=category_id)
 
+
 class CategoryListGalleryView(ListView):
     model = Listing
     template_name = 'classifieds/category_list_gallery.html'
@@ -42,6 +43,7 @@ class CategoryListGalleryView(ListView):
     def get_queryset(self, **kwargs):
         category_id = self.kwargs.get('pk') # none needed as second argument???
         return Listing.objects.filter(category=category_id)
+
 
 class CategoryListListView(ListView):
     model = Listing
@@ -51,13 +53,27 @@ class CategoryListListView(ListView):
         category_id = self.kwargs.get('pk') # none needed as second argument???
         return Listing.objects.filter(category=category_id)
 
+
 class ListingCreateView(CreateView):
     model = Listing
     fields = ["title", 'price', 'location', 'body', 'photo', 'category']
     success_url = reverse_lazy("index_view")
 
+    def form_valid(self, form):
+        listing = form.save(commit=False)
+        listing.user = self.request.user
+        return super().form_valid(form)
+
+
+
 class ListingDetailView(DetailView):
-    pass
+    model = Listing
+    template_name = 'classifieds/listing_detail.html'
+
+    def get_queryset(self, **kwargs):
+        listing_id = self.kwargs.get('pk')
+        return Listing.objects.filter(id=listing_id)
+
 
 class ProfileUpdateView(UpdateView):
     model = Profile
@@ -67,11 +83,21 @@ class ProfileUpdateView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
+
 class ListingDeleteView(DeleteView):
-    pass
+    success_url = reverse_lazy("index_view")
+
+    def get_queryset(self):
+        return Listing.objects.filter(user=self.request.user)
+
+
+
+
+
 
 class ListingUpdateView(UpdateView):
     pass
+
 
 class CityListThumbnailView(ListView):
     model = Listing
@@ -98,6 +124,7 @@ class CityListListView(ListView):
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
         return Listing.objects.filter(location=city_id)
+
 
 class RegionListView(ListView):
     model = Region

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<img src="{{object.photo_url}}" alt="" />
+
+<h1>{{object.title}}</h1>
+<h3>${{object.price}}</h3>
+<p>
+  {{object.body}}
+</p>
+
+<p>
+  {{object.location}}
+</p>
+<p>
+  {{object.created}}
+</p>
+<p>
+  {{object.category}}
+</p>
+
+{% endblock %}
