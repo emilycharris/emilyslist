@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from classifieds.models import Category, Listing, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 from django.core.urlresolvers import reverse_lazy
 
@@ -31,10 +32,15 @@ class CategoryListThumbnailView(ListView):
     model = Listing
     template_name = 'classifieds/category_list_thumbnail.html'
 
-    def get_queryset(self, **kwargs):
-        category_id = self.kwargs.get('pk') # none needed as second argument???
-        return Listing.objects.filter(category=category_id)
+    # def get_queryset(self, **kwargs):
+    #     category_id = self.kwargs.get('pk') # none needed as second argument???
+    #     return Listing.objects.filter(category=category_id)
 
+    # def get_context_data(self, **kwargs):
+    #     category_id = self.kwargs.get('pk')
+    #     #context = category_id
+    #     context['object_list'] = Listing.objects.filter(category=category_id)
+    #     return context
 
 class CategoryListGalleryView(ListView):
     model = Listing
@@ -63,7 +69,6 @@ class ListingCreateView(CreateView):
         listing = form.save(commit=False)
         listing.user = self.request.user
         return super().form_valid(form)
-
 
 
 class ListingDetailView(DetailView):
