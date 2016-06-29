@@ -89,10 +89,11 @@ class ListingDetailView(DetailView):
 class ProfileUpdateView(UpdateView):
     model = Profile
     fields = ['location']
-    success_url = reverse_lazy('index_view')
+    success_url = reverse_lazy('profile_list_view')
 
     def get_object(self, queryset=None):
         return self.request.user.profile
+
 
 
 class ListingDeleteView(DeleteView):
@@ -101,13 +102,6 @@ class ListingDeleteView(DeleteView):
     def get_queryset(self):
         return Listing.objects.filter(user=self.request.user)
 
-
-
-
-
-
-class ListingUpdateView(UpdateView):
-    pass
 
 
 class CityListThumbnailView(ListView):
@@ -130,6 +124,8 @@ class CityListGalleryView(ListView):
 
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
+        #sort = self.request.GET.get('sort')
+        #if sort:
         return Listing.objects.filter(location=city_id)
 
     def get_context_data(self, **kwargs):

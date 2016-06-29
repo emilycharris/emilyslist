@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from classifieds.views import (IndexView, ListingCreateView, ListingDetailView,
-ProfileUpdateView, ListingDeleteView, ListingUpdateView, CreateUserView,
+ProfileUpdateView, ListingDeleteView, CreateUserView,
 RegionListView, CityListThumbnailView, CategoryListThumbnailView,
 CategoryListGalleryView, CityListGalleryView, CategoryListListView, CityListListView)
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,9 +30,8 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index_view"),
     url(r'^create_listing/$', ListingCreateView.as_view(), name='listing_create_view'),
     url(r'^listing/(?P<pk>\d+)/$', ListingDetailView.as_view(), name='listing_detail_view'),
-    url(r'^accounts/profile/$', ProfileUpdateView.as_view(), name="profile_update_view"),
+    url(r'^accounts/profile/$', login_required(ProfileUpdateView.as_view()), name="profile_update_view"),
     url(r'^listing/(?P<pk>\d+)/delete/$', ListingDeleteView.as_view(), name="listing_delete_view"),
-    url(r'^listing/(?P<pk>\d+)/update/$', ListingUpdateView.as_view(), name='listing_update_view'),
     url(r'^create_user/$', CreateUserView.as_view(), name='create_user_view'),
     url(r'^region_list', RegionListView.as_view(), name='region_list_view'),
     url(r'^category/(?P<pk>\d+)/thumbnail/$', CategoryListThumbnailView.as_view(), name='category_list_thumbnail_view'),
