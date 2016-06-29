@@ -120,7 +120,7 @@ class CityListThumbnailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category_id'] = self.kwargs.get('pk')
+        context['city_id'] = self.kwargs.get('pk')
         return context
 
 
@@ -134,7 +134,7 @@ class CityListGalleryView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category_id'] = self.kwargs.get('pk')
+        context['city_id'] = self.kwargs.get('pk')
         return context
 
 
@@ -148,7 +148,7 @@ class CityListListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category_id'] = self.kwargs.get('pk')
+        context['city_id'] = self.kwargs.get('pk')
         return context
 
 class RegionListView(ListView):

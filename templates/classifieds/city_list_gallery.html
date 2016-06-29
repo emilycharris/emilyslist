@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block view %}
+  <p class='pull-right'>Other Views: <a href="{% url 'city_list_thumbnail_view' city_id %}">Thumbnail</a> / <a href="{% url 'city_list_list_view' city_id %}">List</a></p>
+<br>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    {% for object in object_list %}
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img class='gallery' src="{{ object.photo_url }}" alt="">
+        <div class="caption">
+          <h3>{{object.title}}</h3>
+          <div>${{object.price}} </div><div>{{object.location}}</div><div> Posted: {{object.created}} </div>
+          <a href="{% url 'listing_detail_view' object.pk %}" class="btn btn-default" role="button">Details</a></p>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+
+{% endblock %}
