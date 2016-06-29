@@ -1,10 +1,13 @@
 {% extends "base.html" %}
-{% block view %}
-  <p class='pull-right'>Other Views: <a href="{% url 'category_list_gallery_view' category_id %}">Gallery</a> / <a href="{% url 'category_list_list_view' category_id %}">List</a></p>
-<br>
-{% endblock %}
+
 
 {% block content %}
+<p class='pull-right'>Other Views: <a href="{% url 'category_list_gallery_view' category_id %}">Gallery</a> / <a href="{% url 'category_list_list_view' category_id %}">List</a></p>
+<a href="{% url 'category_list_thumbnail_view' category_id %}?sort=-created">Sort by Date</a>
+<a href="{% url 'category_list_thumbnail_view' category_id %}?sort=price">Sort by Price: Lowest to Highest</a>
+<a href="{% url 'category_list_thumbnail_view' category_id %}?sort=-price">Sort by Price: Highest to Lowest</a>
+
+<br>
   {% for object in object_list %}
   <div class="media">
     <div class="media-left">
