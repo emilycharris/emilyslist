@@ -6,7 +6,6 @@ from classifieds.models import Category, Listing, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
-
 from django.core.urlresolvers import reverse_lazy
 
 from classifieds.models import Region, Profile, Category, Listing
@@ -32,24 +31,27 @@ class CategoryListThumbnailView(ListView):
     model = Listing
     template_name = 'classifieds/category_list_thumbnail.html'
 
-    # def get_queryset(self, **kwargs):
-    #     category_id = self.kwargs.get('pk') # none needed as second argument???
-    #     return Listing.objects.filter(category=category_id)
+    def get_queryset(self, **kwargs):
+        category_id = self.kwargs.get('pk')
+        return Listing.objects.filter(category=category_id)
 
-    # def get_context_data(self, **kwargs):
-    #     category_id = self.kwargs.get('pk')
-    #     #context = category_id
-    #     context['object_list'] = Listing.objects.filter(category=category_id)
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
 
 class CategoryListGalleryView(ListView):
     model = Listing
     template_name = 'classifieds/category_list_gallery.html'
 
     def get_queryset(self, **kwargs):
-        category_id = self.kwargs.get('pk') # none needed as second argument???
+        category_id = self.kwargs.get('pk')
         return Listing.objects.filter(category=category_id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
 
 class CategoryListListView(ListView):
     model = Listing
@@ -59,6 +61,10 @@ class CategoryListListView(ListView):
         category_id = self.kwargs.get('pk') # none needed as second argument???
         return Listing.objects.filter(category=category_id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
 
 class ListingCreateView(CreateView):
     model = Listing
@@ -112,6 +118,11 @@ class CityListThumbnailView(ListView):
         city_id = self.kwargs.get('pk')
         return Listing.objects.filter(location=city_id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
+
 
 class CityListGalleryView(ListView):
     model = Listing
@@ -120,6 +131,11 @@ class CityListGalleryView(ListView):
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
         return Listing.objects.filter(location=city_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
 
 
 class CityListListView(ListView):
@@ -130,6 +146,10 @@ class CityListListView(ListView):
         city_id = self.kwargs.get('pk')
         return Listing.objects.filter(location=city_id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_id'] = self.kwargs.get('pk')
+        return context
 
 class RegionListView(ListView):
     model = Region

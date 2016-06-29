@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block view %}
-  <p class='pull-right'>Other Views: <a href="{% url 'category_list_gallery_view' category_id %}">Gallery</a> / <a href="{">List</a></p>
-
-{{category_id}}
+  <p class='pull-right'>Other Views: <a href="{% url 'category_list_gallery_view' category_id %}">Gallery</a> / <a href="{% url 'category_list_list_view' category_id %}">List</a></p>
+<br>
 {% endblock %}
 
 {% block content %}

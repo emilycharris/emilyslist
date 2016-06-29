@@ -19,6 +19,7 @@
       {{request.user}}
 
       {% else %}
+      <a href="{% url 'index_view' %}">Home</a>
       <a href="{% url 'login' %}">Login</a>
       <a href="{% url 'create_user_view' %}">Create User</a>
 
@@ -27,7 +28,7 @@
       <br>
 
       {% block view %}
-        
+
       {% endblock %}
       {% block content %}
 
