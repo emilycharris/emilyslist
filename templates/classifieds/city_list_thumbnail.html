@@ -1,25 +1,46 @@
 {% extends "base.html" %}
-{% block view %}
-  <p class='pull-right'>Other Views: <a href="{% url 'city_list_gallery_view' city_id %}">Gallery</a> / <a href="{% url 'city_list_list_view' city_id %}">List</a></p>
-<br>
-{% endblock %}
+
 
 {% block content %}
+<div class="btn-group" id='right' role="group" aria-label="">
+    <a type="button" class="btn btn-default" href="{% url 'city_list_gallery_view' city_id %}">Gallery View</a>
+    <a type="button" class="btn btn-default" href="{% url 'city_list_list_view' city_id %}">List View</a>
+</div>
+
+
+<div class="btn-group"  role="group" aria-label="">
+  <a type="button" class="btn btn-default" href="{% url 'city_list_thumbnail_view' city_id %}?sort=-created">Sort Date</a>
+  <a type="button" class="btn btn-default" href="{% url 'city_list_thumbnail_view' city_id %}?sort=price">Sort Price: Low/High</a>
+  <a type="button" class="btn btn-default" href="{% url 'city_list_thumbnail_view' city_id %}?sort=-price">Sort Price High/Low</a>
+<br>
+<br>
+</div>
+
+<br>
   {% for object in object_list %}
-  <div class="media">
-    <div class="media-left">
-      <a href="{% url 'listing_detail_view' object.pk %}"><img class="thumb" src="{{ object.photo_url }}" alt="" /></a>
-    </div>
+
+    <div class="media">
+      <div class="media-left">
+        <a class='thumb' href="{% url 'listing_detail_view' object.pk %}">
+          <img class="media-object" id='thumb' src="{{object.photo_url}}" alt="">
+        </a>
+      </div>
+
     <div class="media-body">
-      <h4 class="media-heading"><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a>    ${{object.price}} </h4>
-        <small>{{object.body}}</small>
+        <h4 class="media-heading" id='inline'>{{object.title}}</h4>
+        <h4 class='media-heading' id='inline' style="float:right">${{object.price}}</h4>
+        <br>
+        <br>
+        <p><small>{{object.body}}</small></p>
         <small><em>{{object.location}}</em></small>
         <small><em>Posted: {{object.created}}</em></small>
-        <br>
-        <br>
+      </div>
+    </div>
+<hr>
+    {% endfor %}
+
     </div>
   </div>
-
-  {% endfor %}
+<hr>
 
 {% endblock %}

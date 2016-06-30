@@ -1,9 +1,18 @@
-.thumb{
-  width: 64px;
-  height: 64px;
+#thumb{
+  width: 100px;
+  height: 100px;
 }
 
 .gallery{
   width: 256px;
   height: 256px;
+}
+
+#right{
+  float: right;
+}
+
+#inline{
+  display: inline;
+
 }

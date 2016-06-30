@@ -1,10 +1,22 @@
 {% extends "base.html" %}
-{% block view %}
-  <p class='pull-right'>Other Views: <a href="{% url 'category_list_thumbnail_view' category_id %}">Thumbnail</a> / <a href="{% url 'category_list_list_view' category_id %}">List</a></p>
-<br>
-{% endblock %}
 
 {% block content %}
+<div class="btn-group" id='right' role="group" aria-label="">
+    <a type="button" class="btn btn-default" href="{% url 'category_list_thumbnail_view' category_id %}">Thumbnail View</a>
+    <a type="button" class="btn btn-default" href="{% url 'category_list_list_view' category_id %}">List View</a>
+</div>
+
+
+<div class="btn-group"  role="group" aria-label="">
+  <a type="button" class="btn btn-default" href="{% url 'category_list_gallery_view' category_id %}?sort=-created">Sort Date</a>
+  <a type="button" class="btn btn-default" href="{% url 'category_list_gallery_view' category_id %}?sort=price">Sort Price: Low/High</a>
+  <a type="button" class="btn btn-default" href="{% url 'category_list_gallery_view' category_id %}?sort=-price">Sort Price High/Low</a>
+<br>
+<br>
+<br>
+</div>
+
+
   <div class="row">
     {% for object in object_list %}
     <div class="col-sm-6 col-md-4">

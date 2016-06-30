@@ -50,7 +50,11 @@ class CategoryListGalleryView(ListView):
 
     def get_queryset(self, **kwargs):
         category_id = self.kwargs.get('pk')
-        return Listing.objects.filter(category=category_id)
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(category=category_id).order_by(sort)
+        else:
+            return Listing.objects.filter(category=category_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -62,8 +66,12 @@ class CategoryListListView(ListView):
     template_name = 'classifieds/category_list_list.html'
 
     def get_queryset(self, **kwargs):
-        category_id = self.kwargs.get('pk') # none needed as second argument???
-        return Listing.objects.filter(category=category_id)
+        category_id = self.kwargs.get('pk')
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(category=category_id).order_by(sort)
+        else:
+            return Listing.objects.filter(category=category_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -114,7 +122,12 @@ class CityListThumbnailView(ListView):
 
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
-        return Listing.objects.filter(location=city_id)
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(location=city_id).order_by(sort)
+        else:
+            return Listing.objects.filter(location=city_id)
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -128,9 +141,11 @@ class CityListGalleryView(ListView):
 
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
-        #sort = self.request.GET.get('sort')
-        #if sort:
-        return Listing.objects.filter(location=city_id)
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(location=city_id).order_by(sort)
+        else:
+            return Listing.objects.filter(location=city_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,7 +159,11 @@ class CityListListView(ListView):
 
     def get_queryset(self, **kwargs):
         city_id = self.kwargs.get('pk')
-        return Listing.objects.filter(location=city_id)
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(location=city_id).order_by(sort)
+        else:
+            return Listing.objects.filter(location=city_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
