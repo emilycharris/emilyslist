@@ -18,7 +18,10 @@ from django.contrib import admin
 from classifieds.views import (IndexView, ListingCreateView, ListingDetailView,
 ProfileUpdateView, ListingDeleteView, CreateUserView,
 RegionListView, CityListThumbnailView, CategoryListThumbnailView,
-CategoryListGalleryView, CityListGalleryView, CategoryListListView, CityListListView)
+CategoryListGalleryView, CityListGalleryView, CategoryListListView, CityListListView,)
+from list_api.views import (ListingListCreateAPIView, CategoryListAPIView, SubcategoryListAPIView,
+CategoryRetrieveUpdateAPIView, SubcategoryRetrieveUpdateAPIView, ListingRetrieveUpdateAPIView,
+CategoryListingListAPIView, SubcategoryListingListAPIView)
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -40,4 +43,14 @@ urlpatterns = [
     url(r'^city_list/(?P<pk>\w+)/gallery/$', CityListGalleryView.as_view(), name='city_list_gallery_view'),
     url(r'^category/(?P<pk>\d+)/list/$', CategoryListListView.as_view(), name='category_list_list_view'),
     url(r'^city_list/(?P<pk>\w+)/list/$', CityListListView.as_view(), name='city_list_list_view'),
+
+    url(r'^api/listing/$', ListingListCreateAPIView.as_view(), name='listing_list_create_api_view'),
+    url(r'^api/listing/(?P<pk>\d+)/$', ListingRetrieveUpdateAPIView.as_view(), name='listing_retrieve_update_api_view'),
+    url(r'^api/category/$', CategoryListAPIView.as_view(), name='category_list_api_view'),
+    url(r'^api/category/(?P<pk>\d+)/$', CategoryRetrieveUpdateAPIView.as_view(), name='category_retrieve_update_api_view'),
+    url(r'^api/category/(?P<pk>\d+)/listing/$', CategoryListingListAPIView.as_view(), name='category_listing_list_api_view'),
+
+    url(r'^api/subcategory/$', SubcategoryListAPIView.as_view(), name='SubcategoryListAPIView'),
+    url(r'^api/subcategory/(?P<pk>\d+)/$', SubcategoryRetrieveUpdateAPIView.as_view(), name='subcategory_retrieve_update_api_view'),
+    url(r'^api/subcategory/(?P<pk>\d+)/listing/$', SubcategoryListingListAPIView.as_view(), name='subcategory_listing_list_api_view')
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

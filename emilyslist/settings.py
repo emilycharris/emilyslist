@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'classifieds'
+    'classifieds',
+    'list_api',
+    'rest_framework'
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +127,9 @@ USE_THOUSAND_SEPARATOR = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}
