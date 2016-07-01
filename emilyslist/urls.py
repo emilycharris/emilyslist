@@ -25,6 +25,7 @@ CategoryListingListAPIView, SubcategoryListingListAPIView)
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from rest_framework.authtoken import views
 
 
 urlpatterns = [
@@ -52,5 +53,7 @@ urlpatterns = [
 
     url(r'^api/subcategory/$', SubcategoryListAPIView.as_view(), name='SubcategoryListAPIView'),
     url(r'^api/subcategory/(?P<pk>\d+)/$', SubcategoryRetrieveUpdateAPIView.as_view(), name='subcategory_retrieve_update_api_view'),
-    url(r'^api/subcategory/(?P<pk>\d+)/listing/$', SubcategoryListingListAPIView.as_view(), name='subcategory_listing_list_api_view')
+    url(r'^api/subcategory/(?P<pk>\d+)/listing/$', SubcategoryListingListAPIView.as_view(), name='subcategory_listing_list_api_view'),
+
+    url(r'^api-token-auth/', views.obtain_auth_token),
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

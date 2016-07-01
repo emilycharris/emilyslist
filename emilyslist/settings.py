@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'classifieds',
     'list_api',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
+
 
 ]
 
@@ -131,5 +133,11 @@ MEDIA_ROOT = BASE_DIR
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
+
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
     )
 }

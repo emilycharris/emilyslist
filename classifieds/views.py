@@ -81,7 +81,19 @@ class CategoryListListView(ListView):
 class ListingCreateView(CreateView):
     model = Listing
     fields = ["title", 'price', 'location', 'body', 'photo', 'category']
+
     success_url = reverse_lazy("index_view")
+
+    #def get_initial(self):
+        # Get the initial dictionary from the superclass method
+        #initial = super(ListingCreateView, self).get_initial()
+        # Copy the dictionary so we don't accidentally change a mutable dict
+        #initial = initial.copy()
+        #category = self.object.exclude(category__parent=None)
+        #initial['category'] = category
+           # etc...
+        #return initial
+
 
     def form_valid(self, form):
         listing = form.save(commit=False)
