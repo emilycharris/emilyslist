@@ -5,7 +5,6 @@ import json
 from classifieds.models import Listing, Category
 from list_api.serializers import ListingSerializer, CategorySerializer
 
-
 # Create your views here.
 
 class ListingListCreateAPIView(generics.ListCreateAPIView):
@@ -25,12 +24,21 @@ class CategoryRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = CategorySerializer
 
 class CategoryListingListAPIView(generics.ListAPIView):
-    queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
     def get_queryset(self, **kwargs):
-        category_id = self.kwargs.get('pk')
+        listings = Listing.objects.all()
+        for listing in listings:
+            parent = listing.category.parent
+            if parent is None:
+                category_id = self.kwargs.get('pk')
+                print(category_id)
+#repeating 23 records * 2, not including parent = none in print
+            else:
+                category_id = parent.id
+                print(category_id)
         return Listing.objects.filter(category=category_id)
+
 
 
 class SubcategoryListAPIView(generics.ListAPIView):
