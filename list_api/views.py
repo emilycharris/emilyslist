@@ -8,12 +8,17 @@ from list_api.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 
 
+
 # Create your views here.
 
 class ListingListCreateAPIView(generics.ListCreateAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class ListingRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Listing.objects.all()
