@@ -20,12 +20,10 @@ class IndexView(ListView):
     def get_queryset(self):
         return Category.objects.filter(parent=None)
 
-
 class CreateUserView(CreateView):
     model = User
     form_class = UserCreationForm
     success_url = "/login"
-
 
 class CategoryListThumbnailView(ListView):
     model = Listing
@@ -94,7 +92,6 @@ class ListingCreateView(CreateView):
         listing.user = self.request.user
         return super().form_valid(form)
 
-
 class ListingDetailView(DetailView):
     model = Listing
     template_name = 'classifieds/listing_detail.html'
@@ -102,7 +99,6 @@ class ListingDetailView(DetailView):
     def get_queryset(self, **kwargs):
         listing_id = self.kwargs.get('pk')
         return Listing.objects.filter(id=listing_id)
-
 
 class ProfileUpdateView(UpdateView):
     model = Profile
@@ -113,14 +109,44 @@ class ProfileUpdateView(UpdateView):
         return self.request.user.profile
 
 
+class ProfileListView(ListView):
+    model = Listing
+    template_name = 'classifieds/profile_list_list.html'
 
-class ListingDeleteView(DeleteView):
-    success_url = reverse_lazy("index_view")
+    def get_queryset(self, **kwargs):
+        return Listing.objects.filter(user=self.request.user)
+
+    def get_queryset(self, **kwargs):
+        sort = self.request.GET.get('sort')
+        if sort:
+            return Listing.objects.filter(user=self.request.user).order_by(sort)
+        else:
+            return Listing.objects.filter(user=self.request.user)
+
+class ListingUpdateView(UpdateView):
+    success_url = reverse_lazy("profile_list_view")
+    fields = ["title", 'price', 'location', 'body', 'photo', 'category']
 
     def get_queryset(self):
         return Listing.objects.filter(user=self.request.user)
 
+    def get_form(self, form_class):
+        form = super(ListingUpdateView, self).get_form(form_class)
+        category = Category.objects.exclude(parent=None)
+        form.fields['category'].queryset = category
+        return form
 
+    def form_valid(self, form):
+        listing = form.save(commit=False)
+        listing.user = self.request.user
+        return super().form_valid(form)
+
+
+
+class ListingDeleteView(DeleteView):
+    success_url = reverse_lazy("profile_list_view")
+    def get_queryset(self):
+        return Listing.objects.filter(user=self.request.user)
 
 class CityListThumbnailView(ListView):
     model = Listing
@@ -140,7 +166,6 @@ class CityListThumbnailView(ListView):
         context['city_id'] = self.kwargs.get('pk')
         return context
 
-
 class CityListGalleryView(ListView):
     model = Listing
     template_name = 'classifieds/city_list_gallery.html'
@@ -157,7 +182,6 @@ class CityListGalleryView(ListView):
         context = super().get_context_data(**kwargs)
         context['city_id'] = self.kwargs.get('pk')
         return context
-
 
 class CityListListView(ListView):
     model = Listing

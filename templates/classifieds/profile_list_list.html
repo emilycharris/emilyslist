@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<div class="btn-group"  role="group" aria-label="">
+  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=-created">Sort Date</a>
+  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=price">Sort Price: Low/High</a>
+  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=-price">Sort Price High/Low</a>
+<br>
+<br>
+<br>
+</div>
+
+{% for object in object_list %}
+
+{% endfor %}
+
+<table class="table table-striped">
+<thead>
+    <th>Posted</th>
+    <th>Listing Title</th>
+    <th>Price</th>
+    <th>Location</th>
+    <th>Update / Delete</th>
+</thead>
+{% for object in object_list  %}
+<tr>
+
+    <td>{{object.created}}</td>
+    <td><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a></td>
+    <td>${{object.price}}</td>
+    <td>{{object.location}}</td>
+    <td>
+      <a href="{% url 'listing_update_view' object.pk %}">Update</a> / 
+      <a href="{% url 'listing_delete_view' object.pk %}">Delete</a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

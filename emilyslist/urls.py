@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from classifieds.views import (IndexView, ListingCreateView, ListingDetailView,
-ProfileUpdateView, ListingDeleteView, CreateUserView,
+ProfileUpdateView, ProfileListView, ListingDeleteView, ListingUpdateView, CreateUserView,
 RegionListView, CityListThumbnailView, CategoryListThumbnailView,
 CategoryListGalleryView, CityListGalleryView, CategoryListListView, CityListListView,)
 from list_api.views import (ListingListCreateAPIView, CategoryListAPIView, SubcategoryListAPIView,
@@ -35,7 +35,9 @@ urlpatterns = [
     url(r'^create_listing/$', login_required(ListingCreateView.as_view()), name='listing_create_view'),
     url(r'^listing/(?P<pk>\d+)/$', ListingDetailView.as_view(), name='listing_detail_view'),
     url(r'^accounts/profile/$', login_required(ProfileUpdateView.as_view()), name="profile_update_view"),
+    url(r'^accounts/profile/listings/$', login_required(ProfileListView.as_view()), name='profile_list_view'),
     url(r'^listing/(?P<pk>\d+)/delete/$', login_required(ListingDeleteView.as_view()), name="listing_delete_view"),
+    url(r'^listing/(?P<pk>\d+)/update/$', login_required(ListingUpdateView.as_view()), name='listing_update_view'),
     url(r'^create_user/$', CreateUserView.as_view(), name='create_user_view'),
     url(r'^region_list', RegionListView.as_view(), name='region_list_view'),
     url(r'^category/(?P<pk>\d+)/thumbnail/$', CategoryListThumbnailView.as_view(), name='category_list_thumbnail_view'),
@@ -47,6 +49,7 @@ urlpatterns = [
 
     url(r'^api/listing/$', ListingListCreateAPIView.as_view(), name='listing_list_create_api_view'),
     url(r'^api/listing/(?P<pk>\d+)/$', ListingRetrieveUpdateAPIView.as_view(), name='listing_retrieve_update_api_view'),
+
     url(r'^api/category/$', CategoryListAPIView.as_view(), name='category_list_api_view'),
     url(r'^api/category/(?P<pk>\d+)/$', CategoryRetrieveUpdateAPIView.as_view(), name='category_retrieve_update_api_view'),
     url(r'^api/category/(?P<pk>\d+)/listing/$', CategoryListingListAPIView.as_view(), name='category_listing_list_api_view'),
