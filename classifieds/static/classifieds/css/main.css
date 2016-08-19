@@ -1,18 +1,125 @@
-#thumb{
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -40px;
+  /* Pad bottom by footer height */
+  padding: 0 0 40px;
+}
+
+/* Set the fixed height of the footer here */
+.footer {
+  height: 40px;
+  color: white;
+  background-color: #205872;
+}
+
+
+body {
+  background-color: #e5e8e9
+}
+
+#thumb {
   width: 100px;
   height: 100px;
 }
 
-.gallery{
-  width: 256px;
-  height: 256px;
+.thumbnail {
+  margin-bottom: 0px;
 }
 
-#right{
+.gallery-image {
+  height: 150px;
+  text-align: center;
+}
+
+#right {
   float: right;
 }
 
-#inline{
+#inline {
   display: inline;
+}
 
+#view {
+  width: 200px;
+}
+
+/* navbar */
+.navbar-default {
+  background-color: #205872;
+  border-color: #E7E7E7;
+}
+
+.navbar-default .navbar-nav li a {
+  color: white;
+}
+
+.btn-default {
+  color: white;
+  background-color: #205872
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #cdd2d5;
+  background-color: transparent;
+}
+
+a {
+  color: #205872;
+}
+
+.page-header {
+  margin-top: 20px;
+  border-bottom: 2px solid #205872;
+}
+
+#search-row {
+  float: right;
+  margin-right: 5px;
+}
+
+.text-right {
+  text-align: right;
+  font-size: 10px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+
+.gallery-box {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #205872;
+  padding: 0px;
+}
+
+.dropdown-button {
+  height: 50px;
+  margin-top: 20px;
+}
+
+.price {
+  text-align: right;
+}
+
+.posted {
+  text-align: right;
+  padding-top: 10px;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.listing-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
 }

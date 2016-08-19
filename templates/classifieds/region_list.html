@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'index_view' %}"><large><em>Search Listings by Categories Instead</em></large></a>
 
-{% for object in object_list  %}
-<ul>
-  <a href="{% url 'city_list_thumbnail_view' object.pk %}"><h4>{{object.location}}</h4></a>
-</ul>
+<div class="container">
+  <div class="row" id='search-row'>
+    <div class="col-sm-12">
+      <a href="{% url 'index_view' %}"><large><em>Search Listings by Categories Instead</em></large></a>
+    </div>
+  </div>
+</div>
 
-{% endfor %}
+
+<div class="container">
+      {% for object in object_list  %}
+        <a href="{% url 'city_list_thumbnail_view' object.pk %}"><h4>{{object.location}}</h4></a>
+      {% endfor %}
+</div>
+
 
 {% endblock %}

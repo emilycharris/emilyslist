@@ -108,7 +108,6 @@ class ProfileUpdateView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
-
 class ProfileListView(ListView):
     model = Listing
     template_name = 'classifieds/profile_list_list.html'
@@ -140,8 +139,6 @@ class ListingUpdateView(UpdateView):
         listing = form.save(commit=False)
         listing.user = self.request.user
         return super().form_valid(form)
-
-
 
 class ListingDeleteView(DeleteView):
     success_url = reverse_lazy("profile_list_view")

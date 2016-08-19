@@ -9,38 +9,36 @@
     <link rel="stylesheet" href='{% static "classifieds/css/main.css" %}' media="screen" charset="utf-8">
   </head>
   <body>
+<div id="wrap">
+  <nav class="navbar navbar-default">
+         <div class="container-fluid">
+           <!-- Brand and toggle get grouped for better mobile display -->
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
 
+           </div>
+
+           <!-- Collect the nav links, forms, and other content for toggling -->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             <ul class="nav navbar-nav">
+
+                 {% if request.user.is_authenticated %}
+                   <li><a href="{% url 'index_view' %}">Home</a></li>
+                   <li><a href="{% url 'profile_update_view' %}">Profile for {{ user }}</a></li>
+                   <li><a href="{% url 'listing_create_view' %}">Create Listing</a></li>
+                   <li><a href="{% url 'logout' %}?next={% url 'login' %}">Logout</a></li>
+                 {% else %}
+                   <li><a href="{% url 'index_view' %}">Home</a></li>
+                   <li><a href="{% url 'create_user_view' %}">Create An Account</a></li>
+                   <li><a href="{% url 'login' %}">Login</a></li>
+                 {% endif %}
+
+             </ul>
+
+           </div><!-- /.navbar-collapse -->
+         </div><!-- /.container-fluid -->
+       </nav>
     <div class="container">
-
-      <nav class="navbar navbar-default">
-             <div class="container-fluid">
-               <!-- Brand and toggle get grouped for better mobile display -->
-               <div class="navbar-header">
-                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
-
-               </div>
-
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                 <ul class="nav navbar-nav">
-
-                     {% if request.user.is_authenticated %}
-                       <li><a href="{% url 'index_view' %}">Home</a></li>
-                       <li><a href="{% url 'profile_update_view' %}">Profile for {{ user }}</a></li>
-                       <li><a href="{% url 'listing_create_view' %}">Create Listing</a></li>
-                       <li><a href="{% url 'logout' %}?next={% url 'login' %}">Logout</a></li>
-                     {% else %}
-                       <li><a href="{% url 'index_view' %}">Home</a></li>
-                       <li><a href="{% url 'create_user_view' %}">Create An Account</a></li>
-                       <li><a href="{% url 'login' %}">Login</a></li>
-
-                     {% endif %}
-
-                 </ul>
-
-               </div><!-- /.navbar-collapse -->
-             </div><!-- /.container-fluid -->
-           </nav>
            <div class="page-header">
              <h1>emilyslist <small>an online place to buy & sell</small></h1>
            </div>
@@ -51,7 +49,19 @@
            <h1>Hello World</h1>
 
            {% endblock %}
-    </div>
 
+
+
+    </div>
+  </div>
+
+    <footer class='footer'>
+      <div class="container">
+        <p class='text-right'>Copyright © 2016 Emily Harris</p>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'classifieds/js/bootstrap.js' %}"></script>
   </body>
 </html>
