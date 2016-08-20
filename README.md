@@ -43,3 +43,5 @@ Prevent a non logged-in user from creating or updating any records
 Prevent a logged in user from updating records created by another user.
 
 Use token authentication to allow a user to authenticate
+
+The application was created using the Python programming language, as well as the Django web framework. The application also includes an API using Django REST Framework. Front-end development includes HTML, CSS, and Bootstrap. The application was successfully deployed to the web using Heroku.
