@@ -146,3 +146,4 @@ REST_FRAMEWORK = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 LOGIN_REDIRECT_URL = '/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
