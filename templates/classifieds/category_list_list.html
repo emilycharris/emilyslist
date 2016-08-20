@@ -1,43 +1,61 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="btn-group" id='right' role="group" aria-label="">
-    <a type="button" class="btn btn-default" href="{% url 'category_list_thumbnail_view' category_id %}">Thumbnail View</a>
-    <a type="button" class="btn btn-default" href="{% url 'category_list_gallery_view' category_id %}">Gallery View</a>
+<div class="row">
+  <div class="col-sm-1 dropdown-button">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        View
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'category_list_gallery_view' category_id %}">Gallery View</a></li>
+        <li><a href="{% url 'category_list_thumbnail_view' category_id %}">Thumbnail View</a></li>
+        <li><a href="{% url 'category_list_list_view' category_id %}">List View</a></li>
+      </ul>
+    </div>
+    <br><br>
+  </div>
+
+  <div class="col-sm-1 dropdown-button">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Sort
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'category_list_list_view' category_id %}?sort=-created">By Date</a></li>
+        <li><a href="{% url 'category_list_list_view' category_id %}?sort=price">Price: Low/High</a></li>
+        <li><a href="{% url 'category_list_list_view' category_id %}?sort=-price">Price: High/Low</a></li>
+      </ul>
+    </div>
+    <br><br>
+  </div>
+
 </div>
 
 
-<div class="btn-group"  role="group" aria-label="">
-  <a type="button" class="btn btn-default" href="{% url 'category_list_list_view' category_id %}?sort=-created">Sort Date</a>
-  <a type="button" class="btn btn-default" href="{% url 'category_list_list_view' category_id %}?sort=price">Sort Price: Low/High</a>
-  <a type="button" class="btn btn-default" href="{% url 'category_list_list_view' category_id %}?sort=-price">Sort Price High/Low</a>
-<br>
-<br>
-<br>
+<div class="table-responsive">
+  <table class="table">
+  <thead>
+      <th>Posted</th>
+      <th>Listing Title</th>
+      <th>Location</th>
+      <th><div class="table-price">Price</div></th>
+  </thead>
+  {% for object in object_list  %}
+  <tr>
+
+      <td>{{object.created}}</td>
+      <td><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a></td>
+      <td>{{object.location}}</td>
+      <td><div class="table-price">${{object.price}}</div></td>
+
+  </tr>
+
+  {% endfor %}
+
+  </table>
 </div>
 
-{% for object in object_list %}
-
-{% endfor %}
-
-<table class="table table-striped">
-<thead>
-    <th>Posted</th>
-    <th>Listing Title</th>
-    <th>Price</th>
-    <th>Location</th>
-</thead>
-{% for object in object_list  %}
-<tr>
-
-    <td>{{object.created}}</td>
-    <td><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a></td>
-    <td>${{object.price}}</td>
-    <td>{{object.location}}</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
 
 {% endblock %}

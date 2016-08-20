@@ -81,7 +81,7 @@ class ListingCreateView(CreateView):
     fields = ["title", 'price', 'location', 'body', 'photo', 'category']
     success_url = reverse_lazy("index_view")
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(ListingCreateView, self).get_form(form_class)
         category = Category.objects.exclude(parent=None)
         form.fields['category'].queryset = category

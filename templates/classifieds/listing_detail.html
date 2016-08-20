@@ -1,24 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="row">
+  <div class="col-sm-5 detail-image">
+    <img class='detail-image' src="{{object.photo_url}}" alt="" />
+  </div>
+  <div class="col-sm-7">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2 class='detail-title'>{{object.title}}</h2>
+      </div>
+      <div class="col-sm-3">
+        <h2 class='detail-price'>${{object.price}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <p class='detail-title'>{{object.body}}</p>
+    </div>
 
-<img src="{{object.photo_url}}" alt="" />
+    <div class="row">
+      <div class="col-sm-6">
+        <p class='detail-location'>{{object.location}}</p>
+      </div>
+      <p class='detail-created'>{{object.created}}</p>
+    </div>
+    {% if request.user = listing.user %}
+    <br>
+    <div class="row">
+      <div class="col-sm-10">
+        <a class='btn btn-default pull-right' href="{% url 'listing_update_view' object.pk %}">Update Listing</a>
+      </div>
+      <div class="col-sm-2">
+        <a class='btn btn-default pull-right' href="{% url 'listing_delete_view' object.pk %}">Delete Listing</a>
+      </div>
+    </div>
+    {% endif %}
 
-<h1>{{object.title}}</h1>
-<h3>${{object.price}}</h3>
-<p>
-  {{object.body}}
-</p>
 
-<p>
-  {{object.location}}
-</p>
-<p>
-  {{object.created}}
-</p>
-<p>
-  {{object.category}}
-</p>
-<a href="javascript:history.go(-1)">Return to Search</a>
+
+
+  </div>
+</div>
+
+<div class="">
+  <br>
+  <a href="javascript:history.go(-1)">Return to Search</a>
+
+</div>
 
 
 {% endblock %}

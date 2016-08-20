@@ -1,12 +1,15 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+<h4>Create New Listing</h4><br>
 
 <form class="" action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {{form.as_p}}
-  <input type="submit" name="submit" value="Create / Update Listing">
+  {{form|crispy}}
+  <input class='btn btn-default' type="submit" name="submit" value="Create / Update Listing">
 
 </form>
+<br>
 
 {% endblock %}

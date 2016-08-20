@@ -2,45 +2,79 @@
 
 
 {% block content %}
-<div class="btn-group" id='right' role="group" aria-label="">
-    <a type="button" class="btn btn-default" href="{% url 'category_list_gallery_view' category_id %}">Gallery View</a>
-    <a type="button" class="btn btn-default" href="{% url 'category_list_list_view' category_id %}">List View</a>
+<div class="row">
+  <div class="col-sm-1 dropdown-button">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        View
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'category_list_gallery_view' category_id %}">Gallery View</a></li>
+        <li><a href="{% url 'category_list_thumbnail_view' category_id %}">Thumbnail View</a></li>
+        <li><a href="{% url 'category_list_list_view' category_id %}">List View</a></li>
+      </ul>
+    </div>
+    <br><br>
+  </div>
+
+  <div class="col-sm-1 dropdown-button">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Sort
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'category_list_thumbnail_view' category_id %}?sort=-created">By Date</a></li>
+        <li><a href="{% url 'category_list_thumbnail_view' category_id %}?sort=price">Price: Low/High</a></li>
+        <li><a href="{% url 'category_list_thumbnail_view' category_id %}?sort=-price">Price: High/Low</a></li>
+      </ul>
+    </div>
+    <br><br>
+  </div>
+
 </div>
 
-
-<div class="btn-group"  role="group" aria-label="">
-  <a type="button" class="btn btn-default" href="{% url 'category_list_thumbnail_view' category_id %}?sort=-created">Sort Date</a>
-  <a type="button" class="btn btn-default" href="{% url 'category_list_thumbnail_view' category_id %}?sort=price">Sort Price: Low/High</a>
-  <a type="button" class="btn btn-default" href="{% url 'category_list_thumbnail_view' category_id %}?sort=-price">Sort Price High/Low</a>
-<br>
-<br>
-</div>
 
 <br>
   {% for object in object_list %}
 
-    <div class="media">
-      <div class="media-left">
-        <a class='thumb' href="{% url 'listing_detail_view' object.pk %}">
-          <img class="media-object" id='thumb' src="{{object.photo_url}}" alt="">
+
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumbnail-image">
+        <a href="{% url 'listing_detail_view' object.pk %}">
+          <img class="thumbnail-image" src="{{object.photo_url}}" alt="">
         </a>
       </div>
+    </div>
 
-    <div class="media-body">
-        <h4 class="media-heading" id='inline'>{{object.title}}</h4>
-        <h4 class='media-heading' id='inline' style="float:right">${{object.price}}</h4>
-        <br>
-        <br>
-        <p><small>{{object.body}}</small></p>
-        <small><em>{{object.location}}</em></small>
-        <small><em>Posted: {{object.created}}</em></small>
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-sm-10">
+          <a href="{% url 'listing_detail_view' object.pk %}"><h4 class="thumbnail-listing-name">{{object.title}}</h4></a>
+        </div>
+        <div class="col-sm-2">
+          <h4 class='thumbnail-price'>${{object.price}}</h4>
+        </div>
+      </div> <!--end row-->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p><small>{{object.body}}</small></p>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <small><em>{{object.location}}</em></small>
+          </div>
+          <div class="col-sm-6">
+            <small class='pull-right' ><em>Posted: {{object.created}}</em></small>
+          </div>
+        </div>
       </div>
     </div>
-<hr>
-    {% endfor %}
-
-    </div>
-  </div>
-<hr>
-
+  <br><hr class='gray'>
+{% endfor %}
 {% endblock %}

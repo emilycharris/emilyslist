@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h4>Are you sure you want to delete the listing for {{object.title}}?</h4><br>
   <form class="" action="" method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" name="submit" value="Confirm Delete">
+    <input class='btn btn-default' type="submit" name="submit" value="Confirm Delete">
   </form>
 {% endblock %}

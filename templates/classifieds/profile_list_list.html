@@ -1,46 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
+<h4>My Listings</h4>
 
+<div class="row">
 
+  <div class="col-sm-1 dropdown-button">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Sort
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'profile_list_view' %}?sort=-created">By Date</a></li>
+        <li><a href="{% url 'profile_list_view' %}?sort=price">Price: Low/High</a></li>
+        <li><a href="{% url 'profile_list_view' %}?sort=-price">Price: High/Low</a></li>
+      </ul>
+    </div>
+    <br><br>
+  </div>
 
-<div class="btn-group"  role="group" aria-label="">
-  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=-created">Sort Date</a>
-  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=price">Sort Price: Low/High</a>
-  <a type="button" class="btn btn-default" href="{% url 'profile_list_view' %}?sort=-price">Sort Price High/Low</a>
-<br>
-<br>
-<br>
 </div>
 
-{% for object in object_list %}
 
-{% endfor %}
+<div class="table-responsive">
+  <table class="table">
+  <thead>
+      <th>Update / Delete</th>
+      <th>Posted</th>
+      <th>Listing Title</th>
+      <th>Location</th>
+      <th><div class="table-price">Price</div></th>
+  </thead>
+  {% for object in object_list  %}
+  <tr>
+      <td><a href="{% url 'listing_update_view' object.pk %}">Update</a> / <a href="{% url 'listing_delete_view' object.pk %}">Delete</a></td>
+      <td>{{object.created}}</td>
+      <td><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a></td>
+      <td>{{object.location}}</td>
+      <td><div class="table-price">${{object.price}}</div></td>
 
-<table class="table table-striped">
-<thead>
-    <th>Posted</th>
-    <th>Listing Title</th>
-    <th>Price</th>
-    <th>Location</th>
-    <th>Update / Delete</th>
-</thead>
-{% for object in object_list  %}
-<tr>
+  </tr>
 
-    <td>{{object.created}}</td>
-    <td><a href="{% url 'listing_detail_view' object.pk %}">{{object.title}}</a></td>
-    <td>${{object.price}}</td>
-    <td>{{object.location}}</td>
-    <td>
-      <a href="{% url 'listing_update_view' object.pk %}">Update</a> /
-      <a href="{% url 'listing_delete_view' object.pk %}">Delete</a>
+  {% endfor %}
 
-    </td>
-
-</tr>
-
-{% endfor %}
-
-</table>
+  </table>
+</div>
 
 {% endblock %}

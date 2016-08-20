@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'classifieds',
     'list_api',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'crispy_forms',
+
 
 
 ]
@@ -141,3 +143,6 @@ REST_FRAMEWORK = {
     'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+LOGIN_REDIRECT_URL = '/'

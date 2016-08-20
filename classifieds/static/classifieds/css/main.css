@@ -27,18 +27,8 @@ body {
   background-color: #e5e8e9
 }
 
-#thumb {
-  width: 100px;
-  height: 100px;
-}
-
 .thumbnail {
   margin-bottom: 0px;
-}
-
-.gallery-image {
-  height: 150px;
-  text-align: center;
 }
 
 #right {
@@ -102,6 +92,26 @@ a {
   padding: 0px;
 }
 
+.gallery-image {
+  height: 150px;
+  text-align: center;
+}
+
+.thumbnail-image {
+  max-width: 150px;
+  text-align: center;
+  margin-right: 0px;
+}
+
+.thumbnail-listing-name {
+  margin-top: 0px;
+}
+
+.thumbnail-price {
+  text-align: right;
+  margin-top: 0px;
+}
+
 .dropdown-button {
   height: 50px;
   margin-top: 20px;
@@ -109,6 +119,10 @@ a {
 
 .price {
   text-align: right;
+}
+
+.gray {
+  border-color: gray;
 }
 
 .posted {
@@ -122,4 +136,51 @@ a {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow:hidden;
+}
+
+ul.nav.navbar-nav.navbar-right {
+  text-align: right;
+}
+
+.navbar-default.navbar-brand {
+  color: lightblue
+}
+
+.navbar-default .navbar-brand {
+  color: lightblue;
+}
+
+.table-price {
+  text-align: right;
+}
+
+.detail-title {
+  margin-top: 0px;
+  margin-left: 10px;
+}
+
+p.detail-title {
+  margin-top: 0px;
+  margin-left: 25px;
+  text-align: justify;
+}
+
+.detail-price {
+  margin-top: 0px;
+  text-align: right;
+}
+
+p.detail-location {
+  margin-left: 12px;
+}
+
+p.detail-created {
+  text-align: right;
+}
+
+.detail-image {
+  width: 400px;
+  padding-left: 10px;
+  padding-right: 0px;
+  text-align: right;
 }
