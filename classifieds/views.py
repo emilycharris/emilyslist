@@ -129,7 +129,7 @@ class ListingUpdateView(UpdateView):
     def get_queryset(self):
         return Listing.objects.filter(user=self.request.user)
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(ListingUpdateView, self).get_form(form_class)
         category = Category.objects.exclude(parent=None)
         form.fields['category'].queryset = category
