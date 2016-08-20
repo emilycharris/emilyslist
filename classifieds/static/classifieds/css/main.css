@@ -80,7 +80,14 @@ a {
 
 .text-right {
   text-align: right;
-  font-size: 10px;
+  font-size: 12px;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+
+.text-left {
+  text-align: left;
+  font-size: 12px;
   margin-bottom: 0px;
   margin-top: 15px;
 }
