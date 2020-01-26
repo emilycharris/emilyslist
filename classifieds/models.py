@@ -14,20 +14,20 @@ class Region(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=25, default=None)
-    parent=models.ForeignKey('self', null=True, blank=True, related_name='child')
+    parent=models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 class Listing(models.Model):
-    user = models.ForeignKey('auth.User')
+    user = models.ForeignKey('auth.User', on_delete=models.PROTECT)
     title = models.CharField(max_length=50)
     price = models.DecimalField(decimal_places=2, max_digits=15)
-    location = models.ForeignKey(Region)
+    location = models.ForeignKey(Region, on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
     photo = models.ImageField(upload_to="item_photos", null=True, blank=True)
-    category=models.ForeignKey(Category)
+    category=models.ForeignKey(Category, on_delete=models.PROTECT)
 
     @property
     def photo_url(self):
@@ -37,8 +37,8 @@ class Listing(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField("auth.User")
-    location = models.ForeignKey(Region, default=1)
+    user = models.OneToOneField("auth.User", on_delete=models.PROTECT)
+    location = models.ForeignKey(Region, default=1, on_delete=models.SET_DEFAULT)
 
 @receiver(post_save, sender='auth.User')
 def create_user_profile(**kwargs):

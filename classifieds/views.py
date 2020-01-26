@@ -1,17 +1,11 @@
-from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from classifieds.models import Category, Listing, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from classifieds.models import Region, Profile, Category, Listing
-
-
-# Create your views here.
 
 class IndexView(ListView):
     model = Category
