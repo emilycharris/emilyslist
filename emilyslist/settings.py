@@ -25,7 +25,7 @@ SECRET_KEY = '2pzm72vmbdx@@%g7x3prkedqre_#9dc&i^y3%p8!62-yk(m7#a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['emilyslist.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['emilys-list.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
